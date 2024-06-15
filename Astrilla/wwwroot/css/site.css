@@ -193,6 +193,15 @@ ul {
             transform: scale(1.1);
         }
 
+        .zodiacSigns .contentBoxBlock.active {
+            flex: 1 1 30%;
+            width: 90px;
+            border: 2px solid white;
+            cursor: pointer;
+            background-color: rgba(175, 154, 182, 0.7);
+            transform: scale(1.1);
+        }
+
 .zodiacSigns-Img {
     height: 70px;   
 }
