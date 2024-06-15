@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="contentBoxFlex">
+    <div class="zodiacSignsContainer centeredElements" id="zodiacSignsContainer">
+        <h2>Sternzeichen</h2>
+        <div class="spacer_H_40"></div>
+
+        <div class="zodiacSigns" id="zodiacSigns">
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignAquarius">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Wassermann.png" alt="Wassermann"></div>
+                <div class="zodiacSigns-Name">Wassermann</div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignFish">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Fische.png" alt="Fische"></div>
+                <div class="zodiacSigns-Name">Fische</div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignAries">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Widder.png" alt="Widder"></div>
+                <div class="zodiacSigns-Name">Widder</div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignTaurus">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Stier.png" alt="Stier"></div>
+                <div class="zodiacSigns-Name">Stier</div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignGemini">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Zwilling.png" alt="Zwilling"></div>
+                <div class="zodiacSigns-Name">Zwilling</div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignCancer">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Krebs.png" alt="Krebs"></div>
+                <div class="zodiacSigns-Name">Krebs</div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignLeo">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Löwe.png" alt="Löwe"></div>
+                <div class="zodiacSigns-Name">Löwe</div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignVirgo">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Jungfrau.png" alt="Jungfrau"></div>
+                <div class="zodiacSigns-Name">Jungfrau"></div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignLibra">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Waage.png" alt="Waage"></div>
+                <div class="zodiacSigns-Name">Waage"></div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignScorpio">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Skorpion.png" alt="Skorpion"></div>
+                <div class="zodiacSigns-Name">Skorpion"></div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignSagittarius">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Schütze.png" alt="Schütze"></div>
+                <div class="zodiacSigns-Name">Schütze"></div>
+            </div>
+            <div class="contentBoxBlock zodiacSign" id="zodiacSignCapricorn">
+                <div><img class="zodiacSigns-Img" src="~/src/img/Steinbock.png" alt="Steinbock"></div>
+                <div class="zodiacSigns-Name">Steinbock"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zodiacInformationContainer">
+        <!-- Block -->
+        <div class="contentBoxFlex columnGap30">
+            <img class="zodiacSigns-Img-Small" src="~/src/img/Krebs_Small.png" alt="Krebs">
+            <h1 class="zodiacInformation-Header" id="zodiacInformation-Header">Krebs</h1>
+        </div>
+
+        <hr />
+        <br />
+
+        <!-- Render zodiac Information based on the user selection -->
+        <div id="zodiacInfoContent">
+            <!-- Content will be loaded here via AJAX -->
+        </div>
+    </div>
+</div>
+
+<script src="~/js/zodiacViewSelection.js" asp-append-version="true"></script>

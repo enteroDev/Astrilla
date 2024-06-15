@@ -18,7 +18,12 @@ namespace Astrilla.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Sternzeichen()
+        {
+            return View();
+        }
+
+        public IActionResult ÜberUns()
         {
             return View();
         }
