@@ -17,6 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            // Remove the active class from all zodiac signs
+            zodiacSigns.forEach(sign => {
+                sign.classList.remove("active");
+            });
+
+            // Add the active class to the clicked zodiac sign
+            sign.classList.add("active");
+
             // Get the selected zodiac information block
             const infoId = sign.id.replace('zodiacSign', '');
             console.log("Loading content for:", infoId);
@@ -43,3 +51,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
