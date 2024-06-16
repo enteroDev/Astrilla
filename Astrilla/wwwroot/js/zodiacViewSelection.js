@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Display the selected content
                     const infoElement = document.getElementById(`zodiacInformation${infoId}`);
+
                     if (infoElement) {
                         infoElement.style.display = 'block';
                     } else {
