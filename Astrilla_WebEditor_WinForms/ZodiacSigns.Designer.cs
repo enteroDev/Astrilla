@@ -78,6 +78,7 @@
             btn_SelectionAquarius.TabIndex = 4;
             btn_SelectionAquarius.Text = "Wassermann";
             btn_SelectionAquarius.UseVisualStyleBackColor = true;
+            btn_SelectionAquarius.Click += btn_SelectionAquarius_Click;
             // 
             // btn_SelectionFish
             // 
@@ -87,6 +88,7 @@
             btn_SelectionFish.TabIndex = 5;
             btn_SelectionFish.Text = "Fische";
             btn_SelectionFish.UseVisualStyleBackColor = true;
+            btn_SelectionFish.Click += btn_SelectionFish_Click;
             // 
             // btn_SelectionAries
             // 

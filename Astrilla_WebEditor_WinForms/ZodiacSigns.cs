@@ -34,7 +34,7 @@ namespace Astrilla_WebEditor_WinForms
             panel_SelectionCapricorn.Visible = false;
 
             // Set initial visibility or default view
-            panel_SelectionAquarius.Visible = true; // Show the default panel
+            panel_SelectionAquarius.Visible = true; // Default panel
         }
 
         private void btn_SelectionAquarius_Click(object sender, EventArgs e)
