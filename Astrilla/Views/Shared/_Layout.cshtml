@@ -18,7 +18,7 @@
 
 <body>
     <header>
-        <nav class="menuBar">
+        <nav class="menuBar" id="menuBar">
             <ul class="contentBoxFlex fitHeight">
                 <li class="menuItem borderLeft @(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">
                     <a class="menuLink" asp-area="" asp-controller="Home" asp-action="Index">
@@ -38,7 +38,7 @@
             </ul>
         </nav>
 
-        <div class="webTitle">Astrologie Berger</div>
+        <div class="webTitle" id="webTitle">Astrologie Berger</div>
     </header>
 
 

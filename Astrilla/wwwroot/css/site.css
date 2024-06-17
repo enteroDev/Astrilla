@@ -154,11 +154,6 @@ ul {
     color: white;
 }
 
-@media (max-width: 800px) {
-    .zodiacSignsContainer {
-        margin-bottom: 40px;
-    }
-}
 
 .zodiacInformationContainer {
     display: flex;
@@ -221,6 +216,26 @@ ul {
 
 .zodiacInformationContainer .contentBoxFlex {
     margin-bottom: 5px;
+}
+
+@media (max-width: 1000px) {
+    .zodiacSignsContainer {
+        margin: auto;
+        margin-bottom: 40px;
+    }
+
+    #zodiacSignsContainer {
+        display: block;
+        flex-direction: column;
+    }
+
+    #zodiacInformationHeader {
+        justify-content: center;
+    }
+
+    #zodiacContent {
+        display: block;
+    }
 }
 
 
