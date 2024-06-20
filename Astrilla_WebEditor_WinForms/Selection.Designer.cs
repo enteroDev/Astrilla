@@ -70,24 +70,21 @@
             label_choosePage.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label_choosePage.Location = new Point(143, 151);
             label_choosePage.Name = "label_choosePage";
-            label_choosePage.Size = new Size(275, 21);
+            label_choosePage.Size = new Size(272, 21);
             label_choosePage.TabIndex = 3;
-            label_choosePage.Text = "Bitte zu bearbeitende Seite auswählen:";
+            label_choosePage.Text = "Bitte wähle eine Seite zum Bearbeiten:";
             // 
             // Selection
             // 
-            Name = "Selection";
-            Text = "Astrilla Web Editor";
-
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(555, 502);
-
             Controls.Add(label_choosePage);
             Controls.Add(btn_aboutUs);
             Controls.Add(btn_zodiacSigns);
             Controls.Add(appTitle);
-
+            Name = "Selection";
+            Text = "Astrilla Web Editor";
             ResumeLayout(false);
             PerformLayout();
         }
