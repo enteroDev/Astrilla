@@ -34,6 +34,50 @@ namespace Astrilla_WebEditor_WinForms
             await LoadZodiacInfo(sender);
         }
 
+        private async void btn_SelectionAries_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionTaurus_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionGemini_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionLeo_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionVirgo_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionLibra_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionScorpio_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionSagittarius_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
+
+        private async void btn_SelectionCapricorn_Click(object sender, EventArgs e)
+        {
+            await LoadZodiacInfo(sender);
+        }
 
         private async void btn_SaveChanges_Zodiac_Click(object sender, EventArgs e)
         {
@@ -107,7 +151,16 @@ namespace Astrilla_WebEditor_WinForms
             {
                 var baseUrl = "https://localhost:7030"; // Make sure this URL is correct
                 var response = await client.GetStringAsync($"{baseUrl}/Partial/GetZodiacInfo?id={id}");
-                return JsonConvert.DeserializeObject<ZodiacInformation>(response);
+
+                var jsonResponse = JsonConvert.DeserializeObject<dynamic>(response);
+
+                if (jsonResponse.success == true)
+                {
+                    var zodiacInfoJson = jsonResponse.data.ToString();
+                    return JsonConvert.DeserializeObject<ZodiacInformation>(zodiacInfoJson);
+                }
+
+                return null;
             }
         }
 
@@ -134,7 +187,5 @@ namespace Astrilla_WebEditor_WinForms
             }
             return null;
         }
-
-
     }
 }
