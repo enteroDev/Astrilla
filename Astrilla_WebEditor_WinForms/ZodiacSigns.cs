@@ -39,14 +39,14 @@ namespace Astrilla_WebEditor_WinForms
         {
             var zodiacSignInfo = new ZodiacInformation
             {
-                IDZodiac = _zodiacSignID, // Store the current ID when loading the data
-                SummaryZodiac = tb_SummaryZodiac.Text,
-                TextZodiac1 = tb_TextZodiac1.Text,
-                TextZodiac2 = tb_TextZodiac2.Text,
-                TextZodiac3 = tb_TextZodiac3.Text,
-                TextZodiac4 = tb_TextZodiac4.Text,
-                TextZodiac5 = tb_TextZodiac5.Text,
-                TextZodiac6 = tb_TextZodiac6.Text
+                ID = _zodiacSignID, // Store the current ID when loading the data
+                Summary = tb_SummaryZodiac.Text,
+                Text1 = tb_TextZodiac1.Text,
+                Text2 = tb_TextZodiac2.Text,
+                Text3 = tb_TextZodiac3.Text,
+                Text4 = tb_TextZodiac4.Text,
+                Text5 = tb_TextZodiac5.Text,
+                Text6 = tb_TextZodiac6.Text
             };
 
             var result = await UpdateZodiacSignInfo(zodiacSignInfo);
@@ -61,8 +61,6 @@ namespace Astrilla_WebEditor_WinForms
             if (clickedButton != null)
             {
                 webEditorHandler.ChangeButtonStateActive(clickedButton);
-
-                // Use the button's Name property to determine the zodiac sign ID
                 _zodiacSignID = GetZodiacSignIdFromButtonName(clickedButton.Name).ToLower();
 
                 if (!string.IsNullOrEmpty(_zodiacSignID))
@@ -71,13 +69,13 @@ namespace Astrilla_WebEditor_WinForms
 
                     if (zodiacSignInfo != null)
                     {
-                        tb_SummaryZodiac.Text = FormatText(zodiacSignInfo.SummaryZodiac);
-                        tb_TextZodiac1.Text = FormatText(zodiacSignInfo.TextZodiac1);
-                        tb_TextZodiac2.Text = FormatText(zodiacSignInfo.TextZodiac2);
-                        tb_TextZodiac3.Text = FormatText(zodiacSignInfo.TextZodiac3);
-                        tb_TextZodiac4.Text = FormatText(zodiacSignInfo.TextZodiac4);
-                        tb_TextZodiac5.Text = FormatText(zodiacSignInfo.TextZodiac5);
-                        tb_TextZodiac6.Text = FormatText(zodiacSignInfo.TextZodiac6);
+                        tb_SummaryZodiac.Text = FormatText(zodiacSignInfo.Summary);
+                        tb_TextZodiac1.Text = FormatText(zodiacSignInfo.Text1);
+                        tb_TextZodiac2.Text = FormatText(zodiacSignInfo.Text2);
+                        tb_TextZodiac3.Text = FormatText(zodiacSignInfo.Text3);
+                        tb_TextZodiac4.Text = FormatText(zodiacSignInfo.Text4);
+                        tb_TextZodiac5.Text = FormatText(zodiacSignInfo.Text5);
+                        tb_TextZodiac6.Text = FormatText(zodiacSignInfo.Text6);
                     }
                 }
                 else
@@ -118,7 +116,7 @@ namespace Astrilla_WebEditor_WinForms
         {
             using (var client = new HttpClient())
             {
-                var baseUrl = "https://localhost:7030"; // Make sure this URL is correct
+                var baseUrl = "https://localhost:7030"; // Ensure this URL is correct
                 var json = JsonConvert.SerializeObject(zodiacSignInfo);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 

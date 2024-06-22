@@ -1,22 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
-using System.Threading.Tasks;
-using HtmlAgilityPack;
+using System.Linq;
 using Newtonsoft.Json;
 using Astrilla_Logic;
 using Microsoft.Extensions.FileProviders;
-
-
 
 namespace Astrilla.Controllers
 {
     public class PartialController : Controller
     {
-        private readonly IFileProvider _fileProvider;
+        private readonly IWebHostEnvironment _environment;
 
-        public PartialController(IFileProvider fileProvider)
+        public PartialController(IWebHostEnvironment environment)
         {
-            _fileProvider = fileProvider;
+            _environment = environment;
+        }
+
+        public class ZodiacData
+        {
+            public List<ZodiacInformation> Zodiacs { get; set; }
         }
 
         public ActionResult ZodiacInformation(string sign)
@@ -25,59 +26,50 @@ namespace Astrilla.Controllers
             return PartialView("~/Views/Partial/ZodiacInformation.cshtml");
         }
 
-        // Fetch Zodiac Texts from the Website
-        [HttpGet("Partial/GetZodiacInfo")]
-        public async Task<JsonResult> GetZodiacInfo(string id)
+
+        [HttpGet]
+        public ActionResult GetZodiacInfo(string id)
         {
-            string baseUrl = "https://localhost:7030";
-            string url = $"{baseUrl}/Partial/ZodiacInformation?sign={id}";
+            var filePath = Path.Combine(_environment.WebRootPath, "js", "zodiacTexts.json");
+            var json = System.IO.File.ReadAllText(filePath);
+            var zodiacs = JsonConvert.DeserializeObject<ZodiacData>(json);
 
-            var zodiacInfo = new ZodiacInformation();
-            try
+            if (zodiacs?.Zodiacs == null)
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    var response = await client.GetStringAsync(url);
-                    var document = new HtmlDocument();
-                    document.LoadHtml(response);
-
-                    // Assuming the text is within specific HTML elements
-                    var summaryNode = document.DocumentNode.SelectSingleNode($"//p[@id='summary-{id}']");
-                    var textNode1 = document.DocumentNode.SelectSingleNode($"//p[@id='text1-{id}']");
-                    var textNode2 = document.DocumentNode.SelectSingleNode($"//p[@id='text2-{id}']");
-                    var textNode3 = document.DocumentNode.SelectSingleNode($"//p[@id='text3-{id}']");
-                    var textNode4 = document.DocumentNode.SelectSingleNode($"//p[@id='text4-{id}']");
-                    var textNode5 = document.DocumentNode.SelectSingleNode($"//p[@id='text5-{id}']");
-                    var textNode6 = document.DocumentNode.SelectSingleNode($"//p[@id='text6-{id}']");
-
-                    zodiacInfo = new ZodiacInformation
-                    {
-                        IDZodiac = id,
-                        SummaryZodiac = summaryNode?.InnerText,
-                        TextZodiac1 = textNode1?.InnerText,
-                        TextZodiac2 = textNode2?.InnerText,
-                        TextZodiac3 = textNode3?.InnerText,
-                        TextZodiac4 = textNode4?.InnerText,
-                        TextZodiac5 = textNode5?.InnerText,
-                        TextZodiac6 = textNode6?.InnerText,
-                    };
-                }
+                Console.WriteLine("Failed to deserialize JSON or Zodiacs is null.");
+                return Json(new { success = false, message = "Failed to load zodiac data." });
             }
-            catch (Exception ex)
+
+            var zodiacInfo = zodiacs.Zodiacs.FirstOrDefault(z => !string.IsNullOrEmpty(z.ID) && z.ID.Equals(id, StringComparison.OrdinalIgnoreCase));
+
+            if (zodiacInfo == null)
             {
-                return Json(new { error = "An unexpected error occurred." });
+                Console.WriteLine($"Zodiac with ID '{id}' not found.");
+                return Json(new { success = false, message = "Zodiac not found." });
             }
-            return Json(zodiacInfo);
+
+            Console.WriteLine($"Returning data for zodiac with ID '{id}'");
+            return Json(new { success = true, data = zodiacInfo });
         }
 
-        // Update Website with edited Texts
-        [HttpPost("Partial/UpdateZodiacInfo")]
-        public async Task<JsonResult> UpdateZodiacInfo([FromBody] ZodiacInformation zodiacInfo)
-        {
-            // Implement logic to update the zodiac information here
 
-            // Simulate success
-            return Json(new { success = true });
+        [HttpPost]
+        public ActionResult UpdateZodiacInfo([FromBody] ZodiacInformation zodiacInfo)
+        {
+            var filePath = Path.Combine(_environment.WebRootPath, "js", "zodiacTexts.json");
+            var json = System.IO.File.ReadAllText(filePath);
+            var zodiacs = JsonConvert.DeserializeObject<ZodiacData>(json);
+
+            var index = zodiacs.Zodiacs.FindIndex(z => z.ID.ToLower() == zodiacInfo.ID.ToLower());
+            if (index != -1)
+            {
+                zodiacs.Zodiacs[index] = zodiacInfo;
+                var updatedJson = JsonConvert.SerializeObject(zodiacs);
+                System.IO.File.WriteAllText(filePath, updatedJson);
+                return Json(new { success = true, message = "Zodiac information updated successfully!" });
+            }
+
+            return Json(new { success = false, message = "Zodiac not found." });
         }
     }
 }
